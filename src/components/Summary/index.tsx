@@ -7,14 +7,14 @@ export default function Summary() {
     <SummaryContainer>
       <SummaryCard>
         <header>
-          <span>Entries</span>
+          <span>Income</span>
           <ArrowCircleUp size={32} color={'#00B37E'}/>
         </header>
         <strong>R$ 16.141,00</strong>
       </SummaryCard>
       <SummaryCard>
         <header>
-          <span>Outlay</span>
+          <span>Outcome</span>
           <ArrowCircleDown size={32} color={'#F75A68'}/>
         </header>
         <strong>R$ 16.141,00</strong>
