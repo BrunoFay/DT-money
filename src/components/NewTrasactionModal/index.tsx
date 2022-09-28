@@ -3,7 +3,7 @@ import * as Dialog from '@radix-ui/react-dialog'
 import { CloseModalButton, Content, Overlay, TransactionTypeButton, TransactionTypeContainer } from './styles'
 import { ArrowCircleDown, ArrowCircleUp, X } from 'phosphor-react'
 import * as zod from 'zod'
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 
@@ -18,7 +18,7 @@ const newTransactionsFormSchema = zod.object({
 type NewTransactionFormInputs = zod.infer<typeof newTransactionsFormSchema>
 
 export default function NewTransactionModal() {
-  const { register, handleSubmit, formState: { isSubmitting } } = useForm<NewTransactionFormInputs>({
+  const { control, register, handleSubmit, formState: { isSubmitting } } = useForm<NewTransactionFormInputs>({
     resolver: zodResolver(newTransactionsFormSchema)
   })
   function handleNewTransactionForm(data: NewTransactionFormInputs) {
@@ -40,16 +40,25 @@ export default function NewTransactionModal() {
           <input type="text" placeholder='Description' required {...register('description')} />
           <input type="number" placeholder='Price' required {...register('price', { valueAsNumber: true })} />
           <input type="text" placeholder='Category' required {...register('category')} />
-          <TransactionTypeContainer>
-            <TransactionTypeButton variant='income' value='income'>
-              <ArrowCircleUp size={24} />
-              Income
-            </TransactionTypeButton>
-            <TransactionTypeButton variant='outcome' value='outcome'>
-              <ArrowCircleDown size={24} />
-              Outcome
-            </TransactionTypeButton>
-          </TransactionTypeContainer>
+
+          <Controller
+            control={control}
+            name='type'
+            render={({ field }) => {
+              return (
+                <TransactionTypeContainer onValueChange={field.onChange} value={field.value}>
+                  <TransactionTypeButton variant='income' value='income'>
+                    <ArrowCircleUp size={24} />
+                    Income
+                  </TransactionTypeButton>
+                  <TransactionTypeButton variant='outcome' value='outcome'>
+                    <ArrowCircleDown size={24} />
+                    Outcome
+                  </TransactionTypeButton>
+                </TransactionTypeContainer>
+              )
+            }}
+          />
           <button type='submit' disabled={isSubmitting}>
             Create
           </button>
