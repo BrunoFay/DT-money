@@ -1,17 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Transaction } from '../../@types/transactionPage'
 import Header from '../../components/Header'
 import Summary from '../../components/Summary'
+import { transactionContext } from '../../context/Transactions'
 import SearchForm from './components/SearchForm'
 import { PriceTable, TransactionsContainer, TransactionTable } from './styles'
 
 export default function Transactions() {
-  const [transactions, setTransactions] = useState<Transaction[]>([])
-  async function getAllTransactions() {
-    const response = await fetch('http://localhost:3001/transactions')
-    const data: Transaction[] = await response.json()
-    setTransactions(data)
-  }
+ const {transactions} = useContext(transactionContext)
   return (
     <div>
       <Header />
