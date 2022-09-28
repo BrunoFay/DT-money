@@ -11,9 +11,9 @@ export default function Header() {
         <img src={Logo} alt="" />
         <Dialog.Root>
           <Dialog.Trigger asChild>
-          <NewTransactionButton>New transaction</NewTransactionButton>
+            <NewTransactionButton>New transaction</NewTransactionButton>
           </Dialog.Trigger>
-          <NewTransactionModal/>
+          <NewTransactionModal />
         </Dialog.Root>
       </HeaderContent>
     </HeaderContainer>

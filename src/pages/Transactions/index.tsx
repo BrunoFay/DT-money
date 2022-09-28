@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Transaction } from '../../@types/transactionPage'
+import { useContext } from 'react'
 import Header from '../../components/Header'
 import Summary from '../../components/Summary'
 import { transactionContext } from '../../context/Transactions'
@@ -17,18 +16,18 @@ export default function Transactions() {
         <SearchForm />
         <TransactionTable>
           <tbody>
-            {transactions.map(transaction => (
+            {transactions.map((transaction) => (
               <tr key={transaction.id}>
-                <td width='43%'>{transaction.description}</td>
+                <td width="43%">{transaction.description}</td>
                 <td>
                   <PriceTable variant={transaction.type}>
                     {transaction.type === 'outcome' && '- '}
                     {priceFormatter.format(transaction.price)}
-                  </PriceTable></td>
+                  </PriceTable>
+                </td>
                 <td>{transaction.category}</td>
                 <td>{dateFormatter.format(new Date(transaction.createdAt))}</td>
               </tr>
-
             ))}
           </tbody>
         </TransactionTable>

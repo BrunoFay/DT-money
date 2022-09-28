@@ -6,17 +6,19 @@ import { priceFormatter } from '../../utils/formatters'
 
 export default function Summary() {
   const { transactions } = useContext(transactionContext)
-  const summaryValues = transactions.reduce((acc, curr) => {
-    if (curr.type === 'income') {
-      acc.income += curr.price
-      acc.total += curr.price
-    }
-    else {
-      acc.outcome += curr.price
-      acc.total -= curr.price
-    }
-    return acc
-  }, { income: 0, outcome: 0, total: 0 })
+  const summaryValues = transactions.reduce(
+    (acc, curr) => {
+      if (curr.type === 'income') {
+        acc.income += curr.price
+        acc.total += curr.price
+      } else {
+        acc.outcome += curr.price
+        acc.total -= curr.price
+      }
+      return acc
+    },
+    { income: 0, outcome: 0, total: 0 },
+  )
   return (
     <SummaryContainer>
       <SummaryCard>
@@ -33,7 +35,7 @@ export default function Summary() {
         </header>
         <strong> {priceFormatter.format(summaryValues.outcome)}</strong>
       </SummaryCard>
-      <SummaryCard variant='green'>
+      <SummaryCard variant="green">
         <header>
           <span>Total</span>
           <CurrencyDollar size={32} color={'white'} />

@@ -6,27 +6,34 @@ import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { transactionContext } from '../../../../context/Transactions'
 
-
 const searchZodSchema = zod.object({
-  search: zod.string()
+  search: zod.string(),
 })
 
 type SearchInputForm = zod.infer<typeof searchZodSchema>
 
 export default function SearchForm() {
   const { getAllTransactions } = useContext(transactionContext)
-  const { register, handleSubmit, formState: { isSubmitting } } = useForm<SearchInputForm>({
-    resolver: zodResolver(searchZodSchema)
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useForm<SearchInputForm>({
+    resolver: zodResolver(searchZodSchema),
   })
 
   async function handleSearchForm(data: SearchInputForm) {
-    console.log(data);
+    console.log(data)
     await getAllTransactions(data.search)
   }
   return (
     <SearchFormContainer onSubmit={handleSubmit(handleSearchForm)}>
-      <input type="text" placeholder='Search by transactions' {...register('search')} />
-      <button type='submit' disabled={isSubmitting}>
+      <input
+        type="text"
+        placeholder="Search by transactions"
+        {...register('search')}
+      />
+      <button type="submit" disabled={isSubmitting}>
         <MagnifyingGlass size={20} />
         Search
       </button>
