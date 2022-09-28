@@ -6,3 +6,9 @@ export interface Transaction {
   category:string
   createdAt:string
 }
+export interface NewTransaction {
+  description:string
+  type:'income' | 'outcome'
+  price:number
+  category:string
+}
