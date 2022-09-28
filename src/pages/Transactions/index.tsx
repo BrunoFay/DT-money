@@ -3,11 +3,12 @@ import { Transaction } from '../../@types/transactionPage'
 import Header from '../../components/Header'
 import Summary from '../../components/Summary'
 import { transactionContext } from '../../context/Transactions'
+import { dateFormatter, priceFormatter } from '../../utils/formatters'
 import SearchForm from './components/SearchForm'
 import { PriceTable, TransactionsContainer, TransactionTable } from './styles'
 
 export default function Transactions() {
- const {transactions} = useContext(transactionContext)
+  const { transactions } = useContext(transactionContext)
   return (
     <div>
       <Header />
@@ -19,9 +20,13 @@ export default function Transactions() {
             {transactions.map(transaction => (
               <tr key={transaction.id}>
                 <td width='43%'>{transaction.description}</td>
-                <td> <PriceTable variant={transaction.type}>R$ {transaction.price}</PriceTable></td>
+                <td>
+                  <PriceTable variant={transaction.type}>
+                    {transaction.type === 'outcome' && '- '}
+                    {priceFormatter.format(transaction.price)}
+                  </PriceTable></td>
                 <td>{transaction.category}</td>
-                <td>{transaction.createdAt}</td>
+                <td>{dateFormatter.format(new Date(transaction.createdAt))}</td>
               </tr>
 
             ))}
