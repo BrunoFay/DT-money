@@ -1,3 +1,19 @@
 {
-  "test":[]
+  "transactions":[{
+      "id": 1,
+      "description":"Desenvolvimento de site",
+      "type":"income",
+      "price": 14000,
+      "category":"Venda",
+      "createdAt":"13/04/2022"
+  },
+  {
+    "id": 2,
+    "description":"Hamburguer",
+    "type":"outcome",
+    "price": 40,
+    "category":"Alimentação",
+    "createdAt":"12/04/2022"
+}
+]
 }
