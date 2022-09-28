@@ -3,7 +3,7 @@ import { SearchFormContainer } from './styles'
 import { MagnifyingGlass } from 'phosphor-react'
 import { useForm } from 'react-hook-form'
 import * as zod from 'zod'
-import { zodResolver } from '@hookform/resolvers'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 
 const searchZodSchema = zod.object({

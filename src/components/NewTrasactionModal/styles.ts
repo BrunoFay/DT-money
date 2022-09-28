@@ -51,10 +51,14 @@ export const Content = styled(Dialog.Content)`
       border-radius: 6px;
       cursor:pointer;
 
-      &:hover{
+      &:not(:disabled):hover{
         background-color:${props => props.theme['green-700']} ;
         transition:all 0.2s;
       }
+      &:disabled{
+      opacity: 0.6;
+      cursor:not-allowed
+    }
     }
   }
 `
@@ -81,6 +85,7 @@ export const TransactionTypeContainer = styled(RadioGroup.Root)`
 interface TransactionTypeButtonProps {
   variant: 'income' | 'outcome'
 }
+
 export const TransactionTypeButton = styled(RadioGroup.Item) <TransactionTypeButtonProps>`
   background:${props => props.theme['gray-700']};
   padding: 1rem;
