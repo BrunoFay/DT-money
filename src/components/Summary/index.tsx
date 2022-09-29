@@ -1,23 +1,31 @@
-import React, { useContext } from 'react'
-import { SummaryCard, SummaryContainer } from './styles'
-import { ArrowCircleUp, ArrowCircleDown, CurrencyDollar } from 'phosphor-react'
-import { transactionContext } from '../../context/Transactions'
+import { ArrowCircleDown, ArrowCircleUp, CurrencyDollar } from 'phosphor-react'
+import { useMemo } from 'react'
+import { useContextSelector } from 'use-context-selector'
+import { transactionContext } from '../../context/TransactionsContext'
 import { priceFormatter } from '../../utils/formatters'
+import { SummaryCard, SummaryContainer } from './styles'
 
 export default function Summary() {
-  const { transactions } = useContext(transactionContext)
-  const summaryValues = transactions.reduce(
-    (acc, curr) => {
-      if (curr.type === 'income') {
-        acc.income += curr.price
-        acc.total += curr.price
-      } else {
-        acc.outcome += curr.price
-        acc.total -= curr.price
-      }
-      return acc
-    },
-    { income: 0, outcome: 0, total: 0 },
+  const transactions = useContextSelector(
+    transactionContext,
+    (context) => context.transactions,
+  )
+  const summaryValues = useMemo(
+    () =>
+      transactions.reduce(
+        (acc, curr) => {
+          if (curr.type === 'income') {
+            acc.income += curr.price
+            acc.total += curr.price
+          } else {
+            acc.outcome += curr.price
+            acc.total -= curr.price
+          }
+          return acc
+        },
+        { income: 0, outcome: 0, total: 0 },
+      ),
+    [transactions],
   )
   return (
     <SummaryContainer>
