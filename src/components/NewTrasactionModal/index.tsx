@@ -10,7 +10,7 @@ import {
   Content,
   Overlay,
   TransactionTypeButton,
-  TransactionTypeContainer
+  TransactionTypeContainer,
 } from './styles'
 
 const newTransactionsFormSchema = zod.object({

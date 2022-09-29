@@ -39,7 +39,7 @@ export function TransactionProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     getAllTransactions()
-  }, [])
+  }, [getAllTransactions])
 
   const valueToProvide = {
     transactions,
